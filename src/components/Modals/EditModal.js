@@ -22,12 +22,12 @@ const EditModal = ({ metric, isOpen, closeModal }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={closeModal}
+      onRequestClose={() => closeModal(false)}
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <button onClick={closeModal}>Close</button>
-      <EditForm metric={metric} />
+      <button onClick={() => closeModal(false)}>Close</button>
+      <EditForm metric={metric} closeModal={closeModal} />
     </Modal>
   );
 };

@@ -15,3 +15,23 @@ export const postRequest = (url, data = null) => {
     },
   });
 };
+
+export const putRequest = (url, data = null) => {
+  return axios.put(`${API_BASE_URL}${url}`, data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export const deleteRequest = (url, data = null) => {
+  return axios.delete(
+    `${API_BASE_URL}${url}`,
+    { data },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};

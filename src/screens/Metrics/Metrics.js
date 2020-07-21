@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Metrics.css";
 import { getRequest } from "../../api/requestFunctions";
 import { getMetrics } from "../../api/routes";
-import Modal from "react-modal";
-import Form from "../../components/Form/Form";
-import EditForm from "../../components/Form/EditForm";
 import DeleteModal from "../../components/Modals/DeleteModal";
 import EditModal from "../../components/Modals/EditModal";
 import { Link } from "react-router-dom";
@@ -81,13 +78,19 @@ const Metrics = () => {
       <EditModal
         metric={metricInfo}
         isOpen={editModal}
-        closeModal={() => setEditModal(false)}
+        closeModal={(changes) => {
+          if (changes) getAllMetrics();
+          setEditModal(false);
+        }}
       />
 
       <DeleteModal
         metric={metricInfo}
         isOpen={deleteModal}
-        closeModal={() => setDeleteModal(false)}
+        closeModal={(changes) => {
+          if (changes) getAllMetrics();
+          setDeleteModal(false);
+        }}
       />
     </div>
   );

@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import Checkbox from "@material-ui/core/Checkbox";
 import * as Yup from "yup";
 import "./Form.css";
-import { postRequest } from "../../api/requestFunctions";
-import { createMetric } from "../../api/routes";
+import { postRequest, putRequest } from "../../api/requestFunctions";
+import { createMetric, updateMetric } from "../../api/routes";
 
 const FormSchema = Yup.object().shape({
   metricName: Yup.string().required("A name is required"),
@@ -14,45 +14,42 @@ const FormSchema = Yup.object().shape({
   time: Yup.date().typeError("Must be a date").required("A date is required"),
 });
 
-const EditForm = ({ metric }) => {
+const EditForm = ({ metric, closeModal }) => {
   console.log("METRIC INSIDE FORM", metric);
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    // let timestamp = Date.now();
-    // if (!now) {
-    //   let separator = "/";
-    //   if (!values.time.includes("/")) {
-    //     separator = "-";
-    //   }
-    //   const day = values.time.split(separator)[0];
-    //   const month = values.time.split(separator)[1];
-    //   const yearAndTime = values.time.split(separator)[2];
-    //   const finalDate = `${month}-${day}-${yearAndTime}`;
-    //   timestamp = new Date(finalDate).getTime();
-    // }
-    // const metric = {
-    //   name: values.metricName,
-    //   value: values.metricValue,
-    //   timestamp,
-    // };
+    let separator = "/";
+    if (!values.time.includes("/")) {
+      separator = "-";
+    }
+    const day = values.time.split(separator)[0];
+    const month = values.time.split(separator)[1];
+    const yearAndTime = values.time.split(separator)[2];
+    const finalDate = `${month}-${day}-${yearAndTime}`;
+    const timestamp = new Date(finalDate).getTime();
 
-    // console.log("FINAL METRIC", metric);
+    const body = {
+      id: metric.id,
+      name: values.metricName,
+      value: values.metricValue,
+      timestamp,
+    };
 
-    // try {
-    //   const response = await postRequest(createMetric, metric);
-    //   console.log("RESPONSE", response);
-    // } catch (error) {
-    //   if (
-    //     error.response &&
-    //     error.response.data &&
-    //     error.response.data.message
-    //   ) {
-    //     alert(error.response.data.message);
-    //   } else alert(error);
-    // }
-
-    // requestNewData();
-    setSubmitting(false);
-    resetForm({ values: "" });
+    try {
+      await putRequest(updateMetric, body);
+      setSubmitting(false);
+      resetForm({ values: "" });
+      closeModal(true);
+    } catch (error) {
+      setSubmitting(false);
+      resetForm({ values: "" });
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        alert(error.response.data.message);
+      } else alert(error);
+    }
   };
 
   return (
