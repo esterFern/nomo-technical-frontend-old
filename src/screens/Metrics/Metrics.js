@@ -5,42 +5,18 @@ import { getMetrics } from "../../api/routes";
 import Modal from "react-modal";
 import Form from "../../components/Form/Form";
 import EditForm from "../../components/Form/EditForm";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)??????????
-//Modal.setAppElement("#yourAppElement");????????
+import DeleteModal from "../../components/Modals/DeleteModal";
+import EditModal from "../../components/Modals/EditModal";
+import { Link } from "react-router-dom";
 
 const Metrics = () => {
   const [metrics, setMetrics] = useState([]);
   const [metricInfo, setMetricInfo] = useState({});
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   useEffect(() => {
     getAllMetrics();
   }, []);
-
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  const openModal = (metric) => {
-    console.log("METRIC BEFORE OPEN MODAL", metric);
-    setMetricInfo(metric);
-    setIsOpen(true);
-  };
-
-  const afterOpenModal = () => {};
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setMetricInfo({});
-  };
 
   const getAllMetrics = async () => {
     try {
@@ -67,8 +43,22 @@ const Metrics = () => {
             <p>{m.timestamp}</p>
           </div>
           <div className="MetricButtons">
-            <button onClick={() => openModal(m)}>Edit</button>
-            <button>Delete</button>
+            <button
+              onClick={() => {
+                setMetricInfo(m);
+                setEditModal(true);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                setMetricInfo(m);
+                setDeleteModal(true);
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
       );
@@ -77,6 +67,7 @@ const Metrics = () => {
   return (
     <div className="Metrics">
       <h1 className={"Title"}>Manage metrics</h1>
+      <Link to="/">Back</Link>
       <div className="MetricContainer">
         <div className="MetricTitles">
           <p>Name</p>
@@ -87,17 +78,17 @@ const Metrics = () => {
 
       {renderMetrics()}
 
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <EditForm metric={metricInfo} />
-      </Modal>
+      <EditModal
+        metric={metricInfo}
+        isOpen={editModal}
+        closeModal={() => setEditModal(false)}
+      />
+
+      <DeleteModal
+        metric={metricInfo}
+        isOpen={deleteModal}
+        closeModal={() => setDeleteModal(false)}
+      />
     </div>
   );
 };
