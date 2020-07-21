@@ -1,0 +1,17 @@
+.Toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Toggle p {
+  margin-right: 10px;
+}
+
+.ToggleButton {
+  background-color: gray;
+}
+
+.SelectedToggleButton {
+  background-color: red;
+}

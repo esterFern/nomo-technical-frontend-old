@@ -1,0 +1,50 @@
+.Metrics {
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Title {
+  margin-top: 0px;
+}
+
+.MetricContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.MetricTitles {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.MetricInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.MetricInfo p {
+  margin-right: 20px;
+  width: 200px;
+}
+
+.MetricTitles p {
+  margin-right: 20px;
+  width: 200px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.MetricButtons {
+  display: flex;
+  flex-direction: row;
+}
+
+.MetricButtons button {
+  margin-left: 20px;
+}
