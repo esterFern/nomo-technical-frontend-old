@@ -2,16 +2,59 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  background-color: bisque;
+  width: 700px;
 }
 
 .Toggle p {
-  margin-right: 10px;
-}
-
-.ToggleButton {
-  background-color: gray;
+  margin-right: 5vw;
 }
 
 .SelectedToggleButton {
-  background-color: red;
+  border: 0px;
+  background-color: white;
+  cursor: pointer;
+  color: #53c9b1;
+  font-family: Arial;
+  font-size: 16px;
+  padding: 12px 40px;
+  text-decoration: none;
+  min-width: 5vw;
+  font-weight: bold;
+  border-right: 1px solid #53c9b1;
+  border-left: 1px solid #53c9b1;
+}
+
+.ToggleButton {
+  border: 0px;
+  background-color: white;
+  cursor: pointer;
+  color: #666666;
+  font-family: Arial;
+  font-size: 16px;
+  padding: 12px 40px;
+  text-decoration: none;
+  min-width: 5vw;
+}
+
+.ToggleButton {
+  outline-width: 0px;
+}
+
+.SelectedToggleButton {
+  outline-width: 0px;
+}
+
+.ToggleButton:hover {
+  border: 0px;
+  background-color: white;
+  cursor: pointer;
+  color: #98c4bb;
+  font-family: Arial;
+  font-size: 16px;
+  padding: 12px 40px;
+  text-decoration: none;
+  min-width: 5vw;
 }

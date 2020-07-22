@@ -1,5 +1,6 @@
 import React from "react";
 import "./ToggleAverage.css";
+
 function ToggleAverage({ selected, changeAverage }) {
   return (
     <div className="Toggle">

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./Metrics.css";
-import { getRequest } from "../../api/requestFunctions";
-import { getMetrics } from "../../api/routes";
-import DeleteModal from "../../components/Modals/DeleteModal";
-import EditModal from "../../components/Modals/EditModal";
 import { Link } from "react-router-dom";
+
+import "./Metrics.css";
+
+import { getRequest } from "Api/requestFunctions";
+import { getMetrics } from "Api/routes";
+import DeleteModal from "Components/Modals/DeleteModal";
+import EditModal from "Components/Modals/EditModal";
 
 const Metrics = () => {
   const [metrics, setMetrics] = useState([]);
@@ -31,9 +33,9 @@ const Metrics = () => {
   };
 
   const renderMetrics = () => {
-    return metrics.map((m) => {
+    return metrics.map((m, i) => {
       return (
-        <div className="MetricContainer">
+        <div className="MetricContainer" key={i}>
           <div className="MetricInfo">
             <p>{m.name}</p>
             <p>{m.value}</p>
@@ -62,9 +64,11 @@ const Metrics = () => {
     });
   };
   return (
-    <div className="Metrics">
+    <div id={"Metrics-screen"}>
       <h1 className={"Title"}>Manage metrics</h1>
-      <Link to="/">Back</Link>
+      <Link to="/" className={"Link"}>
+        Back
+      </Link>
       <div className="MetricContainer">
         <div className="MetricTitles">
           <p>Name</p>

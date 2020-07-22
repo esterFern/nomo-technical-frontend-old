@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import Modal from "react-modal";
-import EditForm from "../Form/EditForm";
+
+import EditForm from "Components/Form/EditForm";
 
 const customStyles = {
   content: {
@@ -13,9 +13,6 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)??????????
-//Modal.setAppElement("#yourAppElement");????????
 
 const EditModal = ({ metric, isOpen, closeModal }) => {
   console.log("METRIC IN DELETE MODEL", metric);

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import Modal from "react-modal";
-import { deleteMetric } from "../../api/routes";
-import { deleteRequest } from "../../api/requestFunctions";
+
+import { deleteMetric } from "Api/routes";
+import { deleteRequest } from "Api/requestFunctions";
 
 const customStyles = {
   content: {
@@ -14,9 +14,6 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)??????????
-//Modal.setAppElement("#yourAppElement");????????
 
 const DeleteModal = ({ metric, isOpen, closeModal }) => {
   const removeMetric = async () => {

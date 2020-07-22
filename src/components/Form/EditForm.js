@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik } from "formik";
-import Checkbox from "@material-ui/core/Checkbox";
 import * as Yup from "yup";
+
 import "./Form.css";
-import { postRequest, putRequest } from "../../api/requestFunctions";
-import { createMetric, updateMetric } from "../../api/routes";
+
+import { putRequest } from "Api/requestFunctions";
+import { updateMetric } from "Api/routes";
 
 const FormSchema = Yup.object().shape({
   metricName: Yup.string().required("A name is required"),
