@@ -2,9 +2,8 @@
   text-align: center;
 }
 
-.Container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.FormSection {
   background-color: beige;
+  padding-bottom: 5vh;
+  padding-top: 5vh;
 }

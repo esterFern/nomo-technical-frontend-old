@@ -9,42 +9,24 @@
   margin-top: 0px;
 }
 
-.MetricContainer {
+.Metric-titles {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
-}
-
-.MetricTitles {
-  display: flex;
-  flex-direction: row;
+  width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.MetricInfo {
-  display: flex;
-  flex-direction: row;
-}
-
-.MetricInfo p {
-  margin-right: 20px;
-  width: 200px;
-}
-
-.MetricTitles p {
-  margin-right: 20px;
-  width: 200px;
+.Metric-titles p {
+  margin-right: 1vw;
+  width: 20vw;
   font-weight: bold;
   font-size: 20px;
 }
 
-.MetricButtons {
+.Metric-columns {
   display: flex;
   flex-direction: row;
-}
-
-.MetricButtons button {
-  margin-left: 20px;
+  justify-content: space-between;
+  width: 90%;
 }

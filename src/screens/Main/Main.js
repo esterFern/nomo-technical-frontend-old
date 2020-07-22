@@ -61,19 +61,12 @@ const Main = () => {
     requestNewData();
   }, [requestNewData]);
 
-  // [[
-  //   { date: new Date("2014-10-31 10:23:00"), value: 100 },
-  //   { date: new Date("2014-11-01"), value: 6 },
-  //   { date: new Date("2014-11-02"), value: 18 },
-  // ],
-  // [
-  //   { date: new Date("2014-11-01"), value: 20 },
-  //   { date: new Date("2014-11-03"), value: 5 },
-  // ]]
   return (
     <div className="Main">
-      <h1>New metric</h1>
-      <Form requestNewData={requestNewData} />
+      <div className="FormSection">
+        <h1>New metric</h1>
+        <Form requestNewData={requestNewData} />
+      </div>
       <h1>View metrics</h1>
       <Link to="/metrics" className={"Link"}>
         Manage metrics

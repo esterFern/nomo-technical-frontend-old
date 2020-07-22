@@ -1,0 +1,19 @@
+.Icon-button {
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+}
+
+.Icon-button:focus {
+  outline: 0px;
+}
+
+.Small-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.Medium-icon {
+  width: 30px;
+  height: 30px;
+}

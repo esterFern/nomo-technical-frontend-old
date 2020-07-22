@@ -3,13 +3,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 5vh;
-  background-color: bisque;
-  width: 700px;
+  margin-top: 8vh;
+  width: 70vw;
 }
 
 .Toggle p {
-  margin-right: 5vw;
+  margin-right: 2vw;
 }
 
 .SelectedToggleButton {
@@ -19,9 +18,9 @@
   color: #53c9b1;
   font-family: Arial;
   font-size: 16px;
-  padding: 12px 40px;
+  padding: 12px 2vw;
   text-decoration: none;
-  min-width: 5vw;
+  min-width: 10vw;
   font-weight: bold;
   border-right: 1px solid #53c9b1;
   border-left: 1px solid #53c9b1;
@@ -34,12 +33,12 @@
   color: #666666;
   font-family: Arial;
   font-size: 16px;
-  padding: 12px 40px;
+  padding: 12px 2vw;
   text-decoration: none;
-  min-width: 5vw;
+  min-width: 10vw;
 }
 
-.ToggleButton {
+.ToggleButton:focus {
   outline-width: 0px;
 }
 
@@ -54,7 +53,7 @@
   color: #98c4bb;
   font-family: Arial;
   font-size: 16px;
-  padding: 12px 40px;
+  padding: 12px 2vw;
   text-decoration: none;
-  min-width: 5vw;
+  min-width: 10vw;
 }

@@ -1,0 +1,13 @@
+.Cancel {
+  background-color: rgb(211, 69, 69);
+}
+
+.Cancel:hover {
+  background-color: rgb(250, 119, 119);
+}
+
+.Buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

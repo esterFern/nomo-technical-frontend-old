@@ -3,6 +3,9 @@ import Modal from "react-modal";
 
 import { deleteMetric } from "Api/routes";
 import { deleteRequest } from "Api/requestFunctions";
+import IconButton from "Components/IconButton/IconButton";
+
+import "./Modal.css";
 
 const customStyles = {
   content: {
@@ -39,11 +42,23 @@ const DeleteModal = ({ metric, isOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <button onClick={() => closeModal(false)}>Close</button>
+      <IconButton
+        icon={process.env.PUBLIC_URL + "/images/close.png"}
+        alt={"close-modal"}
+        onClick={() => closeModal(false)}
+        small
+      />
 
       <p>Are you sure you want to delete this metric?</p>
-      <button onClick={removeMetric}>Yes</button>
-      <button onClick={() => closeModal(false)}>No</button>
+
+      <div className="Buttons-container">
+        <button onClick={removeMetric} className="Button">
+          Yes
+        </button>
+        <button onClick={() => closeModal(false)} className="Button Cancel">
+          No
+        </button>
+      </div>
     </Modal>
   );
 };

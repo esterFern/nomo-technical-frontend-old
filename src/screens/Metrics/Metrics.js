@@ -7,6 +7,7 @@ import { getRequest } from "Api/requestFunctions";
 import { getMetrics } from "Api/routes";
 import DeleteModal from "Components/Modals/DeleteModal";
 import EditModal from "Components/Modals/EditModal";
+import Metric from "Components/Metric/Metric";
 
 const Metrics = () => {
   const [metrics, setMetrics] = useState([]);
@@ -35,31 +36,18 @@ const Metrics = () => {
   const renderMetrics = () => {
     return metrics.map((m, i) => {
       return (
-        <div className="MetricContainer" key={i}>
-          <div className="MetricInfo">
-            <p>{m.name}</p>
-            <p>{m.value}</p>
-            <p>{m.timestamp}</p>
-          </div>
-          <div className="MetricButtons">
-            <button
-              onClick={() => {
-                setMetricInfo(m);
-                setEditModal(true);
-              }}
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => {
-                setMetricInfo(m);
-                setDeleteModal(true);
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
+        <Metric
+          metric={m}
+          index={i}
+          onClick={(modal) => {
+            setMetricInfo(m);
+            if (modal === "edit") {
+              setEditModal(true);
+            } else {
+              setDeleteModal(true);
+            }
+          }}
+        />
       );
     });
   };
@@ -69,8 +57,8 @@ const Metrics = () => {
       <Link to="/" className={"Link"}>
         Back
       </Link>
-      <div className="MetricContainer">
-        <div className="MetricTitles">
+      <div className="Metric-columns">
+        <div className="Metric-titles">
           <p>Name</p>
           <p>Value</p>
           <p>Timestamp</p>

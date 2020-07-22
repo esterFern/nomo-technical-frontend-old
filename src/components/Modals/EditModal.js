@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 
 import EditForm from "Components/Form/EditForm";
+import IconButton from "Components/IconButton/IconButton";
 
 const customStyles = {
   content: {
@@ -23,7 +24,13 @@ const EditModal = ({ metric, isOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <button onClick={() => closeModal(false)}>Close</button>
+      <IconButton
+        icon={process.env.PUBLIC_URL + "/images/close.png"}
+        alt={"close-modal"}
+        onClick={() => closeModal(false)}
+        small
+      />
+      <h3>Edit metric</h3>
       <EditForm metric={metric} closeModal={closeModal} />
     </Modal>
   );

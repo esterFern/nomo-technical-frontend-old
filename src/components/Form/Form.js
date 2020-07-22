@@ -13,7 +13,10 @@ const FormSchema = Yup.object().shape({
   metricValue: Yup.number()
     .typeError("The value must be a number")
     .required("A value is required"),
-  time: Yup.date().typeError("Must be a date").required("A date is required"),
+  time: Yup.date()
+    //.format("DD-MM-YYYY", true)
+    .typeError("Must be a date")
+    .required("A date is required"),
 });
 
 const NowFormSchema = Yup.object().shape({
