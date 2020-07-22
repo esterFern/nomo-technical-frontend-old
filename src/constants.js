@@ -1,5 +1,1 @@
-const cssConstants = {
-  primaryColor: "#53c9b1",
-};
-
-export default cssConstants;
+export const API_BASE_URL = "http://localhost:8000/api/";

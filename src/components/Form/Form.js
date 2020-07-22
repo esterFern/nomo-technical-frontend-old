@@ -7,16 +7,15 @@ import "./Form.css";
 
 import { postRequest } from "Api/requestFunctions";
 import { createMetric } from "Api/routes";
+import ConfirmationModal from "Components/Modals/ConfirmationModal";
+import { checkDateFormat } from "Functions/dates";
 
 const FormSchema = Yup.object().shape({
   metricName: Yup.string().required("A name is required"),
   metricValue: Yup.number()
     .typeError("The value must be a number")
     .required("A value is required"),
-  time: Yup.date()
-    //.format("DD-MM-YYYY", true)
-    .typeError("Must be a date")
-    .required("A date is required"),
+  time: Yup.string().required("A date is required"),
 });
 
 const NowFormSchema = Yup.object().shape({
@@ -28,6 +27,8 @@ const NowFormSchema = Yup.object().shape({
 
 const Form = ({ requestNewData }) => {
   const [now, setNow] = useState(true);
+  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [dateError, setDateError] = useState("");
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     let timestamp = Date.now();
@@ -48,11 +49,9 @@ const Form = ({ requestNewData }) => {
       timestamp,
     };
 
-    console.log("FINAL METRIC", metric);
-
     try {
       const response = await postRequest(createMetric, metric);
-      console.log("RESPONSE", response);
+      if (response.data.status === 200) setConfirmationModal(true);
     } catch (error) {
       if (
         error.response &&
@@ -66,6 +65,21 @@ const Form = ({ requestNewData }) => {
     requestNewData();
     setSubmitting(false);
     resetForm({ values: "" });
+  };
+
+  const checkDateError = (d) => {
+    if (d === "") {
+      setDateError("Date is required.");
+      return true;
+    } else if (!checkDateFormat(d)) {
+      setDateError(
+        "Provide a valid date in format DD/MM/YYYY HH:MM:SS, including leading zero."
+      );
+      return true;
+    } else {
+      setDateError("");
+      return false;
+    }
   };
 
   return (
@@ -83,11 +97,24 @@ const Form = ({ requestNewData }) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
+          setFieldTouched,
           isSubmitting,
-          /* and other goodies */
         }) => (
-          <form onSubmit={handleSubmit} className="Form">
-            {/* <div className="NameInput"> */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setFieldTouched("metricName");
+              setFieldTouched("metricValue");
+              if (now) {
+                handleSubmit();
+              } else {
+                if (!checkDateError(values.time)) {
+                  handleSubmit();
+                }
+              }
+            }}
+            className="Form"
+          >
             <input
               className="Input"
               type="text"
@@ -97,8 +124,7 @@ const Form = ({ requestNewData }) => {
               value={values.metricName}
               placeholder="Name"
             />
-            {/* <button className="SelectName" onClick={() => {}} />
-            </div> */}
+
             <p className="Error">
               {errors.metricName && touched.metricName && errors.metricName}
             </p>
@@ -125,22 +151,9 @@ const Form = ({ requestNewData }) => {
                   let currentTime = Date.now();
                   console.log("CURRENT TIME", currentTime);
                   setFieldValue(Date.now(), "time");
-                  //handleChange();
                 }}
                 color={"default"}
               />
-              {/* <input
-                name="now"
-                type="checkbox"
-                checked={now}
-                onChange={() => {
-                  setNow(!now);
-                  let currentTime = Date.now();
-                  console.log("CURRENT TIME", currentTime);
-                  setFieldValue(Date.now(), "time");
-                  //handleChange();
-                }}
-              /> */}
               <div className="Checkbox"></div>
             </label>
 
@@ -149,8 +162,14 @@ const Form = ({ requestNewData }) => {
                 className="Input"
                 type="text"
                 name="time"
-                onChange={handleChange}
-                onBlur={handleBlur}
+                onChange={(e) => {
+                  setFieldValue("time", e.target.value);
+                  checkDateError(e.target.value);
+                }}
+                onBlur={(e) => {
+                  setFieldTouched("time", true);
+                  checkDateError(e.target.value);
+                }}
                 value={values.time}
                 placeholder="DD/MM/YYYY HH:MM:SS"
               />
@@ -158,9 +177,7 @@ const Form = ({ requestNewData }) => {
               <div />
             )}
 
-            <p className="Error">
-              {!now && errors.time && touched.time && errors.time}
-            </p>
+            <p className="Error">{!now && dateError}</p>
 
             <button type="submit" disabled={isSubmitting} className="Button">
               Submit
@@ -168,6 +185,13 @@ const Form = ({ requestNewData }) => {
           </form>
         )}
       </Formik>
+
+      <ConfirmationModal
+        isOpen={confirmationModal}
+        closeModal={() => {
+          setConfirmationModal(false);
+        }}
+      />
     </div>
   );
 };

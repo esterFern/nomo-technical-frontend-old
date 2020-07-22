@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_BASE_URL = "http://localhost:8000/api/";
+import { API_BASE_URL } from "Constants";
 
 export const getRequest = (url, data = null) => {
   let finalUrl = `${API_BASE_URL}${url}`;
