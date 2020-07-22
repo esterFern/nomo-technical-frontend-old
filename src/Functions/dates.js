@@ -1,7 +1,7 @@
 const changeDateFormat = (date, onlyDay) => {
   const month = date.getMonth() + 1;
   if (onlyDay) {
-    return `${date.getDate()}/${checkNumberFormat(
+    return `${checkNumberFormat(date.getDate())}/${checkNumberFormat(
       month
     )}/${date.getFullYear()}`;
   } else {
@@ -24,10 +24,8 @@ const checkDateFormat = (date) => {
     "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4} (2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$"
   );
   if (date.search(pattern) === 0) {
-    console.log("TRUE DATE", date);
     return true;
   } else {
-    console.log("INCORRECT DATE", date);
     return false;
   }
 };

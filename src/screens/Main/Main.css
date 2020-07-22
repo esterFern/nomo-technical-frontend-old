@@ -2,8 +2,21 @@
   text-align: center;
 }
 
-.FormSection {
+.Form-section {
   background-color: beige;
   padding-bottom: 5vh;
   padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Graphic-section {
+  padding-bottom: 5vh;
+  padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

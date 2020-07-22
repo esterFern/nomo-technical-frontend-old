@@ -147,9 +147,11 @@ const Form = ({ requestNewData }) => {
               <Checkbox
                 checked={now}
                 onChange={() => {
+                  if (!now) {
+                    setDateError("");
+                  }
                   setNow(!now);
-                  let currentTime = Date.now();
-                  console.log("CURRENT TIME", currentTime);
+
                   setFieldValue(Date.now(), "time");
                 }}
                 color={"default"}

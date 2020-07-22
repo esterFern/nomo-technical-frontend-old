@@ -16,7 +16,6 @@ const customStyles = {
 };
 
 const EditModal = ({ metric, isOpen, closeModal }) => {
-  console.log("METRIC IN DELETE MODEL", metric);
   return (
     <Modal
       isOpen={isOpen}

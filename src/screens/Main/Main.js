@@ -20,11 +20,10 @@ const Main = () => {
     metrics.forEach((m) => {
       let date;
       const dateArr = m.timestamp.split(" ");
-
       if (dateArr.length > 1) {
-        date = `${dateArr[0].split("-").reverse().join("-")} ${dateArr[1]}`;
+        date = `${dateArr[0].split("/").reverse().join("/")} ${dateArr[1]}`;
       } else {
-        date = `${dateArr[0].split("-").reverse().join("-")}`;
+        date = `${dateArr[0].split("/").reverse().join("/")}`;
       }
 
       if (!names.includes(m.name)) {
@@ -63,29 +62,32 @@ const Main = () => {
 
   return (
     <div className="Main">
-      <div className="FormSection">
-        <h1>New metric</h1>
+      <h1>Metrics registration</h1>
+      <div className="Form-section">
+        <h2>New metric</h2>
         <Form requestNewData={requestNewData} />
       </div>
-      <h1>View metrics</h1>
-      <Link to="/metrics" className={"Link"}>
-        Manage metrics
-      </Link>
-      {metrics.data.length === 0 ? (
-        <p>No metrics to show</p>
-      ) : (
-        <div className="Container">
-          <ToggleAverage
-            selected={average}
-            changeAverage={(type) => {
-              console.log("PRESSED BUTTON");
-              setAverage(type);
-              requestNewData();
-            }}
-          />
-          <Graphic metrics={metrics} onlyDay={average === "day"} />
-        </div>
-      )}
+
+      <div className={"Graphic-section"}>
+        <h2>View metrics</h2>
+        <Link to="/metrics" className={"Link"}>
+          Manage metrics
+        </Link>
+        {metrics.data.length === 0 ? (
+          <p className={"Not-found-message"}>No metrics to show</p>
+        ) : (
+          <div className="Container">
+            <ToggleAverage
+              selected={average}
+              changeAverage={(type) => {
+                setAverage(type);
+                requestNewData();
+              }}
+            />
+            <Graphic metrics={metrics} onlyDay={average === "day"} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

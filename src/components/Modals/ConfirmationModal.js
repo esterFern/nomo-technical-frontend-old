@@ -1,8 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 
-import IconButton from "Components/IconButton/IconButton";
-
 const customStyles = {
   content: {
     top: "50%",

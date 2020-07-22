@@ -21,7 +21,6 @@ input:focus {
   justify-content: center;
   max-width: 20%;
   min-width: 250px;
-  /* background-color: rgb(230, 230, 230); */
 }
 
 .Error {
@@ -30,6 +29,7 @@ input:focus {
   font-size: 12px;
   height: 14px;
   margin-top: 5px;
+  text-align: center;
 }
 
 .CurrentTime {

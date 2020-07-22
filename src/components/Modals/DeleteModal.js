@@ -22,7 +22,6 @@ const DeleteModal = ({ metric, isOpen, closeModal }) => {
   const removeMetric = async () => {
     try {
       const body = { id: metric.id };
-      console.log("BODY TO PASS", body);
       await deleteRequest(deleteMetric, body);
       closeModal(true);
     } catch (error) {

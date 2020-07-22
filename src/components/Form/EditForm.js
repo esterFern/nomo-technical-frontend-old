@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -6,6 +6,7 @@ import "./Form.css";
 
 import { putRequest } from "Api/requestFunctions";
 import { updateMetric } from "Api/routes";
+import { checkDateFormat } from "Functions/dates";
 
 const FormSchema = Yup.object().shape({
   metricName: Yup.string().required("A name is required"),
@@ -16,7 +17,8 @@ const FormSchema = Yup.object().shape({
 });
 
 const EditForm = ({ metric, closeModal }) => {
-  console.log("METRIC INSIDE FORM", metric);
+  const [dateError, setDateError] = useState("");
+
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     let separator = "/";
     if (!values.time.includes("/")) {
@@ -53,6 +55,21 @@ const EditForm = ({ metric, closeModal }) => {
     }
   };
 
+  const checkDateError = (d) => {
+    if (d === "") {
+      setDateError("Date is required.");
+      return true;
+    } else if (!checkDateFormat(d)) {
+      setDateError(
+        "Provide a valid date in format DD/MM/YYYY HH:MM:SS, including leading zero."
+      );
+      return true;
+    } else {
+      setDateError("");
+      return false;
+    }
+  };
+
   return (
     <div className="Container">
       <Formik
@@ -72,10 +89,21 @@ const EditForm = ({ metric, closeModal }) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
+          setFieldTouched,
           isSubmitting,
           /* and other goodies */
         }) => (
-          <form onSubmit={handleSubmit} className="Form">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setFieldTouched("metricName");
+              setFieldTouched("metricValue");
+              if (!checkDateError(values.time)) {
+                handleSubmit();
+              }
+            }}
+            className="Form"
+          >
             <input
               className="Input"
               type="text"
@@ -107,15 +135,19 @@ const EditForm = ({ metric, closeModal }) => {
               className="Input"
               type="text"
               name="time"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              onChange={(e) => {
+                setFieldValue("time", e.target.value);
+                checkDateError(e.target.value);
+              }}
+              onBlur={(e) => {
+                setFieldTouched("time", true);
+                checkDateError(e.target.value);
+              }}
               value={values.time}
               placeholder="DD/MM/YYYY HH:MM:SS"
             />
 
-            <p className="Error">
-              {errors.time && touched.time && errors.time}
-            </p>
+            <p className="Error">{dateError}</p>
 
             <button type="submit" disabled={isSubmitting} className="Button">
               Edit

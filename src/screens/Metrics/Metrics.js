@@ -22,6 +22,7 @@ const Metrics = () => {
     try {
       const response = await getRequest(getMetrics);
       if (response.data.data.length > 0) setMetrics(response.data.data);
+      else setMetrics([]);
     } catch (error) {
       if (
         error.response &&
@@ -57,15 +58,21 @@ const Metrics = () => {
       <Link to="/" className={"Link"}>
         Back
       </Link>
-      <div className="Metric-columns">
-        <div className="Metric-titles">
-          <p>Name</p>
-          <p>Value</p>
-          <p>Timestamp</p>
-        </div>
-      </div>
 
-      {renderMetrics()}
+      {metrics.length === 0 ? (
+        <p className={"Not-found-message"}>No metrics</p>
+      ) : (
+        <div>
+          <div className="Metric-columns">
+            <div className="Metric-titles">
+              <p>Name</p>
+              <p>Value</p>
+              <p>Timestamp</p>
+            </div>
+          </div>
+          {renderMetrics()}
+        </div>
+      )}
 
       <EditModal
         metric={metricInfo}
