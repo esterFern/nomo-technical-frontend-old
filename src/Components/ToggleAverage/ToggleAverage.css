@@ -1,0 +1,49 @@
+.Toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8vh;
+  width: 70vw;
+}
+
+.Toggle p {
+  margin: 0;
+  margin-right: 2vw;
+}
+
+.Toggle button {
+  padding: 12px 2vw;
+  background-color: white;
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.SelectedToggleButton {
+  border: 0px;
+  color: #53c9b1;
+
+  font-weight: bold;
+  border-right: 1px solid #53c9b1;
+  border-left: 1px solid #53c9b1;
+}
+
+.ToggleButton {
+  border: 0px;
+  color: #666666;
+}
+
+.ToggleButton:hover {
+  color: #98c4bb;
+  /* min-width: 10vw; */
+}
+
+.ToggleButton:focus {
+  outline-width: 0px;
+}
+
+.SelectedToggleButton {
+  outline-width: 0px;
+}

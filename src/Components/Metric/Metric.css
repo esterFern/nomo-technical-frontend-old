@@ -1,0 +1,16 @@
+.Metric-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.Metric-info p {
+  margin-right: 1vw;
+  width: 20vw;
+}
+
+.Metric-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 15vw;
+}
